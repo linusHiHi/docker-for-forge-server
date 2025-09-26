@@ -1,0 +1,30 @@
+services:
+  minecraft-forge:
+    # 告诉 Docker Compose 使用当前目录的 Dockerfile 来构建镜像
+    image: "crpi-vv1v4s4fdwh8q4xq.cn-hangzhou.personal.cr.aliyuncs.com/autsch/forge-mc-server:DeC-latest"
+
+    container_name: forge-mc-server
+    
+    environment:
+      - EULA=TRUE
+      - MC_VERSION=${MC_VERSION}
+      - FORGE_VERSION=${FORGE_VERSION}
+    
+    ports:
+      - "25565:25565"  # Minecraft 服务器端口
+    
+    volumes:
+      # 挂载世界存档和配置文件到主机，实现数据持久化
+      - ../data/world:/app/world
+      - ../data/modified_data:/app/modified_data
+  
+      
+    restart: unless-stopped
+    
+    # 设置内存限制
+    deploy:
+      resources:
+        limits:
+          memory: 6G
+        reservations:
+          memory: 2G

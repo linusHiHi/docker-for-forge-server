@@ -33,14 +33,18 @@ docker-compose -fdocker-compose.yml build
 # 设置镜像名称
 set LOCAL_IMAGE "forge-mc-server:$PACK_NAME-latest"
 # docker pull crpi-vv1v4s4fdwh8q4xq.cn-hangzhou.personal.cr.aliyuncs.com/autsch/forge-mc-server:[镜像版本号]
-set REMOTE_TAG "crpi-vv1v4s4fdwh8q4xq.cn-hangzhou.personal.cr.aliyuncs.com/autsch/forge-mc-server:$PACK_NAME-$VERSION"
-
+set remote_base $DOCKER_HUB_PREFIX
+set REMOTE_TAG "$remote_base:$PACK_NAME-$VERSION"
+set REMOTE_TAG_LATEST "$remote_base:$PACK_NAME-latest"
 # 标记镜像
 echo "标记镜像: $LOCAL_IMAGE -> $REMOTE_TAG"
 docker tag $LOCAL_IMAGE $REMOTE_TAG
+docker tag $LOCAL_IMAGE $REMOTE_TAG_LATEST
 
 # 推送镜像
 echo "推送镜像: $REMOTE_TAG"
 docker push $REMOTE_TAG
+echo "推送镜像: $REMOTE_TAG_LATEST"
+docker push $REMOTE_TAG_LATEST
 
 echo "构建和推送完成!"
