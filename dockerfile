@@ -18,7 +18,7 @@ RUN groupadd -r minecraft && useradd -r -g minecraft minecraft
 WORKDIR /tmp
 
 # --- install server pack files ---
-COPY ./${PACK_NAME}/ ./${PACK_NAME}/
+COPY ./packs/${PACK_NAME}/ ./${PACK_NAME}/
 
 RUN set -eux; \
     if [ -f "./${PACK_NAME}/${INSTALLER_NAME}" ]; then \

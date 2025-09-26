@@ -7,19 +7,19 @@ services:
       context: .
       dockerfile: dockerfile
       args:
-        - JAVA_VERSION=17
-        - MC_VERSION=1.18.2
-        - FORGE_VERSION=40.2.4
-        - PACK_NAME=packs
+        - JAVA_VERSION=${JAVA_VERSION}
+        - MC_VERSION=${MC_VERSION}
+        - FORGE_VERSION=${FORGE_VERSION}
+        - PACK_NAME=${PACK_NAME}
     # 为构建出的镜像指定一个明确的名称和标签
-    image: my-forge-server:1.18.2-forge-40.2.4
+    image: forge-mc-server:${PACK_NAME}-latest
     
-    container_name: minecraft-forge-server
+    container_name: forge-mc-server
     
     environment:
       - EULA=TRUE
-      - MC_VERSION=1.18.2
-      - FORGE_VERSION=40.2.4
+      - MC_VERSION=${MC_VERSION}
+      - FORGE_VERSION=${FORGE_VERSION}
     
     ports:
       - "25565:25565"  # Minecraft 服务器端口
