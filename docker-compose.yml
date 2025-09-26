@@ -5,10 +5,12 @@ services:
     # 告诉 Docker Compose 使用当前目录的 Dockerfile 来构建镜像
     build:
       context: .
+      dockerfile: dockerfile
       args:
         - JAVA_VERSION=17
         - MC_VERSION=1.18.2
         - FORGE_VERSION=40.2.4
+        - PACK_NAME=packs
     # 为构建出的镜像指定一个明确的名称和标签
     image: my-forge-server:1.18.2-forge-40.2.4
     
@@ -24,13 +26,9 @@ services:
     
     volumes:
       # 挂载世界存档和配置文件到主机，实现数据持久化
-      - ./world:/data/world
-      - ./config:/data/config
-      - ./mods:/data/mods
-      - ./scripts:/data/scripts
-      - ./kubejs:/data/kubejs
-      - ./defaultconfigs:/data/defaultconfigs
-      - ./logs:/data/logs
+      - ./data/world:/app/world
+      - ./data/modified_data:/app/modified_data
+  
       
     restart: unless-stopped
     
