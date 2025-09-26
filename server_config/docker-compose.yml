@@ -1,7 +1,7 @@
 services:
   minecraft-forge:
     # 告诉 Docker Compose 使用当前目录的 Dockerfile 来构建镜像
-    image: "crpi-vv1v4s4fdwh8q4xq.cn-hangzhou.personal.cr.aliyuncs.com/autsch/forge-mc-server:DeC-latest"
+    image: "crpi-vv1v4s4fdwh8q4xq.cn-hangzhou.personal.cr.aliyuncs.com/autsch/forge-mc-server:Planetary-latest"
 
     container_name: forge-mc-server
     
