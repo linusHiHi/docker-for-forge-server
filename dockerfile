@@ -13,7 +13,7 @@ ENV INSTALLER_NAME=forge-${MC_VERSION}-${FORGE_VERSION}-installer.jar \
     PACK_NAME=${PACK_NAME}
 
 # Create minecraft user (rarely changes)
-RUN groupadd -r minecraft && useradd -r -g minecraft minecraft
+RUN groupadd -g 1234 -r mia && useradd -r -g mia -u 1000 mc
 
 WORKDIR /tmp
 
@@ -76,11 +76,12 @@ RUN chown -R minecraft:minecraft /app && \
     find /app -type f -name "*.sh" -exec chmod +x {} \; && \
     chmod -R 755 /app/docker_scripts 2>/dev/null || true && \
     mkdir -p /modified_data /app/world && \
-    chown minecraft:minecraft /modified_data /app/world
+    chown minecraft:minecraft /modified_data /app/world && \
+    chmod 777 /app/world
 
 VOLUME [ "/app/modified_data", "/app/world" ]
 
-USER minecraft:minecraft
+USER mc:mia
 
 CMD ["./docker-entry.sh"]
 

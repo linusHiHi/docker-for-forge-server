@@ -11,8 +11,14 @@ services:
       - EULA=TRUE
       # 禁用版本检查以减少网络请求和日志噪音
       - FORGE_FORCE_ANSI=false
+      # 禁用网络相关功能以避免卡住
+      - VERSION_CHECK=false
+      - DISABLE_SENTRY=true
+      - DISABLE_BETA_FEATURES=true
+      # 网络超时设置
+      - HTTP_TIMEOUT=5000
       # 优化 JVM 参数
-      - JAVA_OPTS=-XX:+UseG1GC -XX:+UnlockExperimentalVMOptions -XX:MaxGCPauseMillis=100 -XX:+DisableExplicitGC -XX:TargetSurvivorRatio=90 -XX:G1NewSizePercent=50 -XX:G1MaxNewSizePercent=80 -XX:G1MixedGCLiveThresholdPercent=35 -XX:+AlwaysPreTouch -XX:+ParallelRefProcEnabled
+      - JAVA_OPTS=-XX:+UseG1GC -XX:+UnlockExperimentalVMOptions -XX:MaxGCPauseMillis=100 -XX:+DisableExplicitGC -XX:TargetSurvivorRatio=90 -XX:G1NewSizePercent=50 -XX:G1MaxNewSizePercent=80 -XX:G1MixedGCLiveThresholdPercent=35 -XX:+AlwaysPreTouch -XX:+ParallelRefProcEnabled -Dfml.readTimeout=90 -Dfml.loginTimeout=10
     
     ports:
       - "25564:25565"  # Minecraft 服务器端口
@@ -28,6 +34,6 @@ services:
     deploy:
       resources:
         limits:
-          memory: 10G
+          memory: 16G
         reservations:
           memory: 2G

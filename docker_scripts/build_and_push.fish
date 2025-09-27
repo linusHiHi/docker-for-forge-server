@@ -9,7 +9,9 @@ if test -z "$VERSION"
 end
 
 # 读取环境变量文件
-set -l env_file ".env"
+# 获取脚本所在目录的父目录（项目根目录）
+set -l script_dir (dirname (status -f))
+set -l env_file "$script_dir/../.env"
 if test -f $env_file
     for line in (cat $env_file)
         if test (string length $line) -gt 0; and not string match -q "#*" $line
@@ -28,7 +30,7 @@ echo "  VERSION: $VERSION"
 
 # 构建镜像
 echo "正在构建镜像..."
-docker-compose -fdocker-compose.yml build
+docker-compose -f "../docker-compose.yml" build
 
 # 设置镜像名称
 set LOCAL_IMAGE "forge-mc-server:$PACK_NAME-latest"

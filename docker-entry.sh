@@ -16,6 +16,13 @@ if [ -f "/app/modified_data/user_jvm_args.txt" ]; then
     cp "/app/modified_data/user_jvm_args.txt" "user_jvm_args.txt"
 fi
 
+if [ ! -f "server.properties" ]; then
+    echo "server.properties not found, creating default..."
+    cp /app/default_files/server.properties server.properties
+fi
+
+
+
 # Ensure user_jvm_args.txt exists before starting server
 if [ ! -f "user_jvm_args.txt" ]; then
     echo "user_jvm_args.txt not found, creating default..."

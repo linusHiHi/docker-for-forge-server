@@ -1,0 +1,1 @@
+scp -r ../server_config/data/modified_data/* smaiHost:/www/public/mc/Planetary/data/modified_data/
