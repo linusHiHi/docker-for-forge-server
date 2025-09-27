@@ -1,1 +1,29 @@
+# 模组包目录（通常包含大文件）
 /packs/
+
+# 数据持久化目录
+/data/
+server_config/data/world/
+server_config/data/modified_data/
+
+# Docker 相关
+.env.local
+
+# 日志文件
+*.log
+debug.log
+latest.log
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# IDE 文件
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 临时文件
+*.tmp
+*.temp
