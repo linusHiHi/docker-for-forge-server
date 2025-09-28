@@ -79,7 +79,7 @@ RUN chown -R mc:mia /app && \
     chown mc:mia /modified_data /app/world && \
     chmod 777 /app/world
 
-VOLUME [ "/app/modified_data", "/app/world", "/app/log", "/app/crash-reports", "/app/mod-pack" ]
+VOLUME [ "/app/modified_data", "/app/world", "/app/log", "/app/crash-reports"]
 
 USER mc:mia
 

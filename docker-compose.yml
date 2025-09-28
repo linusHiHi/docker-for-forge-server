@@ -28,6 +28,8 @@ services:
       # 挂载世界存档和配置文件到主机，实现数据持久化
       - ./data/world:/app/world:Z
       - ./data/modified_data:/app/modified_data:Z
+      - ./data/log:/app/log:Z
+      - ./data/crash-reports:/app/crash-reports:Z
 
   
       
