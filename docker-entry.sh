@@ -21,7 +21,9 @@ if [ ! -f "server.properties" ]; then
     cp /app/default_files/server.properties /app/server.properties
 fi
 
-cp /app/modified_data/* /app/ -r
+cp /app/modified_data/* /app/ -r || echo "No modified data files to copy"
+
+bash /app/docker_scripts/for_start_mount_volumn.sh
 
 # Ensure user_jvm_args.txt exists before starting server
 if [ ! -f "/app/user_jvm_args.txt" ]; then

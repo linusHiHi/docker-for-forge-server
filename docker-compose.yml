@@ -30,6 +30,7 @@ services:
       - ./data/modified_data:/app/modified_data:Z
       - ./data/log:/app/log:Z
       - ./data/crash-reports:/app/crash-reports:Z
+      - ./data/modpacks:/tmp/modpacks:Z
 
   
       

@@ -49,4 +49,11 @@ docker push $REMOTE_TAG
 echo "推送镜像: $REMOTE_TAG_LATEST"
 docker push $REMOTE_TAG_LATEST
 
+set local_docker_compose_path "$script_dir/../server_config/docker-compose.yml"
+set remote_docker_compose_path "/www/public/mc/$PACK_NAME/docker-compose.yml"
+set IMAGE_PREFIX "crpi-vv1v4s4fdwh8q4xq.cn-hangzhou.personal.cr.aliyuncs.com/autsch/forge-mc-server"
+sed "s|image: \".*\"|image: \"${IMAGE_PREFIX}:${VERSION}\"|g" "$LOCAL_FILE" > "${LOCAL_FILE}.tmp"
+mv "${LOCAL_FILE}.tmp" "$LOCAL_FILE"
+scp -r $local_docker_compose_path smaiHost:$remote_docker_compose_path
+
 echo "构建和推送完成!"
