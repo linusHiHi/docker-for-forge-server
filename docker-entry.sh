@@ -1,5 +1,5 @@
 #!/bin/bash
-
+cd /app
 if [ ! -f "eula.txt" ]; then
     echo "eula.txt not found, creating with eula=true"
     echo "eula=true" > eula.txt
@@ -13,18 +13,18 @@ fi
 
 if [ -f "/app/modified_data/user_jvm_args.txt" ]; then
     echo "user_jvm_args.txt found, copying from modified_data"
-    cp "/app/modified_data/user_jvm_args.txt" "user_jvm_args.txt"
+    cp "/app/modified_data/user_jvm_args.txt" "/app/user_jvm_args.txt"
 fi
 
 if [ ! -f "server.properties" ]; then
     echo "server.properties not found, creating default..."
-    cp /app/default_files/server.properties server.properties
+    cp /app/default_files/server.properties /app/server.properties
 fi
 
-
+cp /app/modified_data/* /app/ -r
 
 # Ensure user_jvm_args.txt exists before starting server
-if [ ! -f "user_jvm_args.txt" ]; then
+if [ ! -f "/app/user_jvm_args.txt" ]; then
     echo "user_jvm_args.txt not found, creating default..."
     echo "-Xmx10G -Xms2G" > user_jvm_args.txt
 fi
@@ -37,7 +37,7 @@ if [ "${JAVA_VERSION:-8}" -lt 17 ]; then
     echo "Using JVM args: $JVM_ARGS"
     java $JVM_ARGS -jar forge-$MC_VERSION-$FORGE_VERSION.jar nogui "$@"
 else
-    java @user_jvm_args.txt @libraries/net/minecraftforge/forge/${MC_VERSION:-1.18.2}-${FORGE_VERSION:-40.2.4}/unix_args.txt "$@"
+    java @user_jvm_args.txt @libraries/net/minecraftforge/forge/${MC_VERSION:-1.18.2}-${FORGE_VERSION:-40.2.4}/unix_args.txt nogui "$@"
 fi
 
 

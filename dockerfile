@@ -46,7 +46,7 @@ RUN set -eux; \
     fi
 
 # Set final permissions and cleanup
-RUN chown -R minecraft:minecraft /app && \
+RUN chown -R mc:mia /app && \
     chmod +x /app/docker-entry.sh && \
     chmod -R +x /app/docker_scripts/ && \
     rm -rf /tmp/* && \
@@ -72,14 +72,14 @@ COPY --from=build /etc/group /etc/group
 WORKDIR /app
 
 # Setup permissions and volume mount points
-RUN chown -R minecraft:minecraft /app && \
+RUN chown -R mc:mia /app && \
     find /app -type f -name "*.sh" -exec chmod +x {} \; && \
     chmod -R 755 /app/docker_scripts 2>/dev/null || true && \
     mkdir -p /modified_data /app/world && \
-    chown minecraft:minecraft /modified_data /app/world && \
+    chown mc:mia /modified_data /app/world && \
     chmod 777 /app/world
 
-VOLUME [ "/app/modified_data", "/app/world" ]
+VOLUME [ "/app/modified_data", "/app/world", "/app/log", "/app/crash-reports", "/app/mod-pack" ]
 
 USER mc:mia
 
